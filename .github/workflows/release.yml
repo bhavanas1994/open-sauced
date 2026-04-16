@@ -39,7 +39,7 @@ jobs:
           tags: latest
 
       - name: "📦 docker build"
-        uses: docker/build-push-action@v2
+        uses: docker/build-push-action@v4
         with:
           context: .
           tags: ${{ steps.meta.outputs.tags }}
@@ -50,7 +50,7 @@ jobs:
           cache-to: type=gha, scope=${{ github.workflow }}
 
       - name: "📂 docker artifacts"
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v4
         with:
           name: docker
           path: /tmp/docker.tar
@@ -61,10 +61,10 @@ jobs:
     timeout-minutes: 10
     steps:
       - name: "☁️ checkout repository"
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       - name: "🔧 setup node"
-        uses: actions/setup-node@v2.1.5
+        uses: actions/setup-node@v4
         with:
           node-version: 20
 
@@ -84,7 +84,7 @@ jobs:
           root_path: "src/"
 
       - name: "📊 visualiser artifacts"
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v4
         with:
           name: diagram
           path: public/diagram.svg
@@ -93,7 +93,7 @@ jobs:
         run: npm run build
 
       - name: "📂 production artifacts"
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v4
         with:
           name: build
           path: build
@@ -111,7 +111,7 @@ jobs:
     timeout-minutes: 10
     steps:
       - name: "☁️ checkout repository"
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
@@ -121,7 +121,7 @@ jobs:
           rm -rf supabase/diagrams/
 
       - name: "📂 download docker artifacts"
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v4
         with:
           name: docker
           path: /tmp
@@ -132,13 +132,13 @@ jobs:
           docker image ls -a
 
       - name: "📂 download build artifacts"
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v4
         with:
           name: build
           path: build
 
       - name: "📂 download diagram artifacts"
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v4
         with:
           name: diagram
           path: public/

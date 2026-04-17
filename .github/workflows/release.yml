@@ -18,7 +18,7 @@ jobs:
     timeout-minutes: 10
     steps:
       - name: "☁️ checkout repository"
-        uses: actions/cache@v4
+        uses: actions/checkout@v4
 
       - name: "🔧 setup buildx"
         uses: docker/setup-buildx-action@v1
